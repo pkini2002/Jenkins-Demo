@@ -134,4 +134,4 @@
 
   - You can make changes and commit the code any number of times and the pipeline will automatically pull the code every 3 min from the main branch build the code and will produce the console output with a success or failure message
 
-  <img width="476" height="500" alt="Screenshot 2023-10-29 130642" src="https://github.com/pkini2002/Jenkins-Demo/assets/84091455/db0ce5cd-0490-4b56-9a9c-004ba6f1e4a0">
+  <img width="476"  alt="Screenshot 2023-10-29 130642" src="https://github.com/pkini2002/Jenkins-Demo/assets/84091455/db0ce5cd-0490-4b56-9a9c-004ba6f1e4a0">
