@@ -1,5 +1,11 @@
 # Setting Up an Automation Test Using Jenkins and Integrating with VCS like Github
 
+### Prerequisites to install Jenkins
+
+- JDK 1.7 or 1.8
+- 2GB Ram
+- Set env Variable `JAVA_HOME` to point to JDK base directory Ex: `C:\Program Files\Java\jdk 1.8.0_162`
+
 ### Jenkins Installation on Windows
 
 - Go to the official website of Jenkins and download the relevant release by clicking the name of the platform (in our case you have to choose Windows):
@@ -64,3 +70,66 @@
 - Then you will be prompted to instance configuration UI. Here it is always suggested to go with the recommended port configuration.
 
  <img width="476" alt="Step13" src="https://github.com/pkini2002/NMAMIT-CSE-Labs-2020-24/assets/84091455/5ee1c8b4-ecab-43d8-95da-ece64cf81457">
+
+ ### Creating Automation Test
+
+ Once you are in the dashboard of Jenkins 
+
+ - Click on New Item
+ - Enter the Item Name
+ - Select FreeStyle Project / Pipeline
+ - Once Done Click OK
+ - Now the configuration page of your Jenkins instance opens
+ - Scroll down to find Source code management
+ - Tick Git and add the repo URL `https://github.com/pkini2002/Jenkins-Demo.git`
+ - In the branches to build type `*/main`
+ - Scroll down to find the build triggers
+ - Tick the build periodically checkbox
+ - Specify the duration after which you want to automatically build your code.
+ - In my case I have specified it as 3 min (After every 3 min it will pull my code from repo, build the code and test it)
+ - To do so, specify `*/3 * * * *` in the textbox provided (Click on the que mark for more info about cron jobs)
+ - Scroll down and select `Exceute Windows Batch Command` in Build Steps
+ - I have written a very simple line of command for the demonstration. Write the script which you want to get automated
+
+  ```
+    Javac Hello.java
+    java Hello
+  ```
+
+  - Click on Save
+  - Then Click on Build now from the left pane
+  - You will get a Success/Failure console output after the build is complete
+
+  ```
+      Started by timer
+      Running as SYSTEM
+      Building in workspace C:\ProgramData\Jenkins\.jenkins\workspace\JavaTesting
+      The recommended git tool is: NONE
+      No credentials specified
+       > git.exe rev-parse --resolve-git-dir C:\ProgramData\Jenkins\.jenkins\workspace\JavaTesting\.git # timeout=10
+      Fetching changes from the remote Git repository
+       > git.exe config remote.origin.url https://github.com/pkini2002/Jenkins-Demo.git # timeout=10
+      Fetching upstream changes from https://github.com/pkini2002/Jenkins-Demo.git
+       > git.exe --version # timeout=10
+       > git --version # 'git version 2.35.1.windows.2'
+       > git.exe fetch --tags --force --progress -- https://github.com/pkini2002/Jenkins-Demo.git +refs/heads/*:refs/remotes/origin/* # timeout=10
+       > git.exe rev-parse "refs/remotes/origin/main^{commit}" # timeout=10
+      Checking out Revision cc9c5f3d279b44f09a3f151e35024c567a3e82a9 (refs/remotes/origin/main)
+       > git.exe config core.sparsecheckout # timeout=10
+       > git.exe checkout -f cc9c5f3d279b44f09a3f151e35024c567a3e82a9 # timeout=10
+      Commit message: "Update README.md"
+       > git.exe rev-list --no-walk cc9c5f3d279b44f09a3f151e35024c567a3e82a9 # timeout=10
+      [JavaTesting] $ cmd /c call C:\WINDOWS\TEMP\jenkins8228152341912714143.bat
+      
+      C:\ProgramData\Jenkins\.jenkins\workspace\JavaTesting>Javac Hello.java 
+      
+      C:\ProgramData\Jenkins\.jenkins\workspace\JavaTesting>java Hello 
+      Hello World
+      I am testing my code using Jenkins
+      I am testing my code using Jenkins again
+      
+      C:\ProgramData\Jenkins\.jenkins\workspace\JavaTesting>exit 0 
+      Finished: SUCCESS
+  ```
+
+  <img width="476" alt="Screenshot 2023-10-29 130642" src="https://github.com/pkini2002/Jenkins-Demo/assets/84091455/db0ce5cd-0490-4b56-9a9c-004ba6f1e4a0">
