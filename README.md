@@ -98,6 +98,19 @@
     java Hello
   ```
 
+*Execute windows batch command*
+
+```
+javac Hello.java
+
+if %errorlevel% EQU 0 (
+    java Hello
+) else (
+    echo Build unsuccessful due to compilation errors
+    exit /b %errorlevel%
+)
+```
+
   - Click on Save
   - Then Click on Build now from the left pane
   - You will get a Success/Failure console output after the build is complete
