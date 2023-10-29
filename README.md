@@ -6,6 +6,8 @@
 - 2GB Ram
 - Set env Variable `JAVA_HOME` to point to JDK base directory Ex: `C:\Program Files\Java\jdk 1.8.0_162`
 
+> You can use the cmd `java -version` or `javac -version` or `echo %JAVA_HOME%` to check your JDK version
+
 ### Jenkins Installation on Windows
 
 - Go to the official website of Jenkins and download the relevant release by clicking the name of the platform (in our case you have to choose Windows):
